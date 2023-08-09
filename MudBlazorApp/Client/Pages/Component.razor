@@ -1,0 +1,21 @@
+﻿@page "/snackBar"
+@inject ISnackbar Snackbar
+<PageTitle>SnackBar</PageTitle>
+
+
+
+<MudButton Color="Color.Dark" @onclick="@(() => ChangePosition("Severity Normal", Defaults.Classes.Position.TopStart))">Normal Snackbar</MudButton>
+<MudButton Color="Color.Info" @onclick="@(() => Snackbar.Add("The reactor was fired up successfully", Severity.Info))">Info Snackbar</MudButton>
+<MudButton Color="Color.Success" @onclick="@(() => Snackbar.Add("The reactor is running at optimum temperature", Severity.Success))">Success Snackbar</MudButton>
+<MudButton Color="Color.Warning" @onclick="@(() => Snackbar.Add("The reactor temperature exceeds the optimal range", Severity.Warning))">Warning Snackbar</MudButton>
+<MudButton Color="Color.Error" @onclick="@(() => Snackbar.Add("Reactor meltdown is imminent", Severity.Error))">Error Snackbar</MudButton>
+
+
+@code {
+    void ChangePosition(string message, string position)
+    {
+        Snackbar.Clear();
+        Snackbar.Configuration.PositionClass = position;
+        Snackbar.Add(message, Severity.Normal);
+    }
+}

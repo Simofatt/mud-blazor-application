@@ -1,0 +1,43 @@
+﻿@page "/addAuthor" 
+@using Blazored.FluentValidation;
+@using Infrastructure.Models 
+@using Infrastructure.Services;
+
+
+
+
+
+
+
+<MudCard>
+    <EditForm Model="@author" ValidationDelay="0" OnSubmit="RegisterAsync">
+        <FluentValidationValidator @ref="_fluentValidationValidator" />
+        
+        <MudCardContent>
+            <MudTextField @bind-Value="author.FirstName"
+                          For="@(() => author.FirstName)"
+                          T="string"
+                          Immediate="true"
+                          Label="First Name" />
+
+            <MudTextField @bind-Value="author.LastName"
+                          For="@(() => author.LastName)"
+                          Immediate="true"
+                          T="string"
+                          Label="Last Name" />
+
+
+        </MudCardContent>
+       
+    
+    
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Submit</MudButton>
+    
+    </EditForm>
+</MudCard>
+
+
+
+   
+
+

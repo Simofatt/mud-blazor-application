@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LijsDev.CrystalReportsRunner</name>
+    </assembly>
+    <members>
+        <member name="T:LijsDev.CrystalReportsRunner.MemoryMappedFileUtils">
+            <summary>
+            Helper methods for memory-mapped files.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.ReportExporter.Export(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats,System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.ReportExporter.ExportToMemoryMappedFile(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats)">
+            <inheritdoc/>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.ViewerForm.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.ViewerForm.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.ViewerForm.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>

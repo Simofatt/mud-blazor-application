@@ -1,0 +1,1159 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LijsDev.CrystalReportsRunner.Core</name>
+    </assembly>
+    <members>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnection">
+            <summary>
+            Crystal Report Report Connection
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnection.Server">
+            <summary>
+            Maps to Crystal Reports ConnectionInfo -> ServerName
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnection.Database">
+            <summary>
+            Maps to Crystal Reports ConnectionInfo -> DatabaseName
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnection.Username">
+            <summary>
+            Maps to Crystal Reports ConnectionInfo -> UserID
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnection.Password">
+            <summary>
+            Maps to Crystal Reports ConnectionInfo -> Password
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnection.UseIntegratedSecurity">
+            <summary>
+            Maps to Crystal Reports ConnectionInfo -> IntegratedSecurity
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnection.LogonProperties">
+            <summary>
+            Logon Properties
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnectionFactory">
+            <summary>
+            Crystal Reports Connection Factory
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnectionFactory.CreateSqlConnection(System.String,System.String)">
+            <summary>
+            Create a SQL Server connection using Integrated Security
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsConnectionFactory.CreateSqlConnection(System.String,System.String,System.String,System.String)">
+            <summary>
+            Create a SQL Server connection using SQL username and password
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine">
+            <summary>
+            Crystal Reports Engine
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.Timeout">
+            <summary>
+            Time out for waiting for child process to connect. Default: 60 seconds.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.RunnerPath">
+            <summary>
+            The pather for the runner. By default the engine runs the first runner it finds in the main assembly directory.
+            Full path or relative path to the assemble directory (including the filename) for the location of the executable of the runner.
+            If you using NuGet package you can leave this with default value and it will work. Only use in advanced scenarios.
+            Default: null - The engine uses the first runner it finds in the main assembly directory with the name 'CrystalReportsRunner.{version}.{platform}' and the runner with executable name 'LijsDev.CrystalReportsRunner.exe'
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.LogLevel">
+            <summary>
+            Minimum logging level for the runner. Default: Error.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.LogDirectory">
+            <summary>
+            Path for the log files. Default: ${specialfolder:folder=CommonApplicationData}/LijsDev/CrystalReportRunner/logs/${processname}-${shortdate}.log.
+            For more information please refer to NLog file path documentation.
+            Default: ProgramData/LijsDev/CrystalReportRunner/logs
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.ViewerSettings">
+            <summary>
+            Viewer settings
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.NamedPipeName">
+            <summary>
+            Named pipes name used by the runner process to communicate with CrystalReportsEngine.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.IsRunnerProcessAvailable">
+            <summary>
+            Returns true if Crystal Reports Runner process/pipe is alive (connected state).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.Export(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats,System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Exports a report to the specified filename.
+            </summary>
+            <param name="report">Report to export</param>
+            <param name="exportFormat">Export format</param>
+            <param name="destinationFilename">Destination filename</param>
+            <param name="overwrite">Overwrite existing destination file if exists. Default: true</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.Export(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats,System.Threading.CancellationToken)">
+            <summary>
+            Exports a report to a memory stream.
+            </summary>
+            <param name="report">Report to export</param>
+            <param name="exportFormat">Export format</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.ShowReport(System.String,System.String,LijsDev.CrystalReportsRunner.Core.WindowHandle,System.Threading.CancellationToken)">
+            <summary>
+            Show specified Crystal Reports file in Viewer window.
+            Viewer will close when CrystalReportEngine is disposed unless CloseRunnerProcessAtExit is set to false.
+            </summary>
+            <param name="reportFilename">Crystal Reports RPT file path</param>
+            <param name="viewerTitle">Title to display in the Viewer window</param>
+            <param name="owner">Optional owner window handle. Useful for CenterParent initial location</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.ShowReport(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},LijsDev.CrystalReportsRunner.Core.WindowHandle,System.Threading.CancellationToken)">
+            <summary>
+            Show specified Crystal Reports file in Viewer window.
+            Viewer will close when CrystalReportEngine is disposed unless CloseRunnerProcessAtExit is set to false.
+            </summary>
+            <param name="reportFilename">Crystal Reports RPT file path</param>
+            <param name="viewerTitle">Title to display in the Viewer window</param>
+            <param name="parameters">Database query parameters</param>
+            <param name="owner">Optional owner window handle. Useful for CenterParent initial location</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.ShowReport(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.WindowHandle,System.Threading.CancellationToken)">
+            <summary>
+            Show specified Crystal Reports in Viewer window.
+            Viewer will close when CrystalReportEngine is disposed unless CloseRunnerProcessAtExit is set to false.
+            </summary>
+            <param name="report">Report to show</param>
+            <param name="owner">Optional owner window handle. Useful for CenterParent initial location</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.ShowReportDialog(System.String,System.String,LijsDev.CrystalReportsRunner.Core.WindowHandle,System.Threading.CancellationToken)">
+            <summary>
+            Show specified Crystal Reports file in Viewer dialog
+            </summary>
+            <param name="reportFilename">Crystal Reports RPT file path</param>
+            <param name="viewerTitle">Title to display in the Viewer window</param>
+            <param name="owner">Owner window handle</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.ShowReportDialog(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.WindowHandle,System.Threading.CancellationToken)">
+            <summary>
+            Show specified Crystal Reports in Viewer dialog
+            </summary>
+            <param name="report">Report to show</param>
+            <param name="owner">Owner window handle</param>
+            <param name="cancellationToken">A cancellation token that can be used to cancel the work</param>
+            <returns>The dialog result.</returns>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.CloseRunner(System.Int32)">
+            <summary>
+            Nicely close pipe and wait a little bit for it to end gracefully and avoid killing it with process tracker.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="E:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.FormClosed">
+            <summary>
+            Fires when a form is closed.
+            </summary>
+        </member>
+        <member name="E:LijsDev.CrystalReportsRunner.Core.CrystalReportsEngine.FormLoaded">
+            <summary>
+            Fires when a form is loaded.
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.FormClosedEventArgs">
+            <summary>
+            Form Closed Event Arguments.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.FormClosedEventArgs.ReportFileName">
+            <summary>
+            The report's filename which was shown in the form.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.FormClosedEventArgs.WindowLocation">
+            <summary>
+            Location of the form before it was closed.
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.FormLoadedEventArgs">
+            <summary>
+            Form Loaded Event Arguments.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.FormLoadedEventArgs.ReportFileName">
+            <summary>
+            The report's filename which was shown in the form.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.FormLoadedEventArgs.WindowHandle">
+            <summary>
+            Handle of the form.
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ICrystalReportsRunner">
+            <summary>
+            Crystal Reports Runner interface for named pipes communication
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ICrystalReportsRunner.Export(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats,System.String,System.Boolean)">
+            <summary>
+            Exports a report to the specified filename.
+            </summary>
+            <param name="report">Report to export</param>
+            <param name="exportFormat">Export format</param>
+            <param name="destinationFilename">Destination filename</param>
+            <param name="overwrite">Overwrite existing destination file if exists. Default: true</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ICrystalReportsRunner.ExportToMemoryMappedFile(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats)">
+            <summary>
+            Exports a report to a memory mapped file.
+            Returns the name of the memory mapped file.
+            </summary>
+            <param name="report">Report to export</param>
+            <param name="exportFormat">Export format</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ICrystalReportsRunner.ShowReport(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportViewerSettings,LijsDev.CrystalReportsRunner.Core.WindowHandle)">
+            <summary>
+            Show report in modeless window
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ICrystalReportsRunner.ShowReportDialog(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportViewerSettings,LijsDev.CrystalReportsRunner.Core.WindowHandle)">
+            <summary>
+            Show report in modal window
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.WindowLocation">
+            <summary>
+            Represents location and size of window.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.WindowLocation.Height">
+            <summary>
+            Window height.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.WindowLocation.Width">
+            <summary>
+            Window Width.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.WindowLocation.Top">
+            <summary>
+            Window Top.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.WindowLocation.Left">
+            <summary>
+            Window Left.
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ICrystalReportsCaller">
+            <summary>
+            Crystal Reports Caller interface
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ICrystalReportsCaller.FormClosed(System.String,LijsDev.CrystalReportsRunner.Core.WindowLocation)">
+            <summary>
+            Form Closed Event
+            </summary>
+            <param name="reportFileName"></param>
+            <param name="location"></param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ICrystalReportsCaller.FormLoaded(System.String,LijsDev.CrystalReportsRunner.Core.WindowHandle)">
+            <summary>
+            Form Loaded Event.
+            </summary>
+            <param name="reportFileName"></param>
+            <param name="windowHandle"></param>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.JsonNetPipeSerializer">
+            <summary>
+            Serializer used for named pipes communication
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.JsonNetPipeSerializer.Deserialize(System.Byte[],System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.JsonNetPipeSerializer.Serialize(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.LogLevel">
+            <summary>
+            Specify logger verbosity.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.LogLevel.Trace">
+            <summary>
+            Logs everything.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.LogLevel.Debug">
+            <summary>
+            Logs Debug logs and higher levels.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.LogLevel.Info">
+            <summary>
+            Logs Info logs and higher levels.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.LogLevel.Warn">
+            <summary>
+            Logs Warning logs and higher levels.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.LogLevel.Error">
+            <summary>
+            Logs Error logs and higher levels.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.LogLevel.Fatal">
+            <summary>
+            Only logs Fatal logs.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.LogLevel.Off">
+            <summary>
+            Disables logging.
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker">
+            <summary>
+            Allows processes to be automatically killed if this parent process unexpectedly quits
+            (or when an instance of this class is disposed).
+            </summary>
+            <remarks>
+            This "just works" on Windows 8.
+            To support Windows Vista or Windows 7 requires an app.manifest with specific content
+            <see href="https://stackoverflow.com/a/9507862/46926">as described here</see>.
+            </remarks>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker._jobHandle">
+            <summary>
+            The job handle.
+            </summary>
+            <remarks>
+            Closing this handle would close all tracked processes. So we don't do it in this process
+            so that it happens automatically when our process exits.
+            </remarks>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker"/> class.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker.AddProcess(System.Diagnostics.Process)">
+            <summary>
+            Ensures a given process is killed when the current process exits.
+            </summary>
+            <param name="process">The process whose lifetime should never exceed the lifetime of the current process.</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker.Dispose">
+            <summary>
+            Kills all processes previously tracked with <see cref="M:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker.AddProcess(System.Diagnostics.Process)"/> by closing the Windows Job.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ProcessJobTracker.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.Report">
+            <summary>
+            Report
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.Report.#ctor(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.Report.#ctor(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.Report.#ctor(System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.Report.Filename">
+            <summary>
+            Crystal Reports RPT filename
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.Report.Title">
+            <summary>
+            Report title to be displayed in the Report Viewer Window title.
+            Default: 'Report'
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.Report.ExportFilename">
+            <summary>
+            Initial export filename that will appear in the Save Dialog when exporting the report.
+            Default: null (will use the report Title)
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.Report.Connection">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.Report.Parameters">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.Report.DataSets">
+            <inheritdoc/>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ReportExportFormats">
+            <summary>
+            Report export formats
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.CrystalReport">
+            <summary>
+            Crystal Reports
+            Extension: rpt
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.RichText">
+            <summary>
+            Rich Text Format (RTF)
+            Extension: rtf
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.Word">
+            <summary>
+            Microsoft Word (97-2003)
+            Extension: doc
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.Excel">
+            <summary>
+            Microsoft Excel (97-2003)
+            Extension: xls
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.PDF">
+            <summary>
+            Portable Document Format
+            Extension: pdf
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.HTML32">
+            <summary>
+            HTML - not working
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.HTML40">
+            <summary>
+            HTML - not working
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.ExcelRecord">
+            <summary>
+            Microsoft Excel (97-2003) Data-Only
+            Extension: xls
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.Text">
+            <summary>
+            Standard Text Document
+            Extension: txt
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.CharacterSeparatedValues">
+            <summary>
+            Character Separated Values (CSV)
+            Extension: csv
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.TabSeperatedText">
+            <summary>
+            Tab Separated Values (TSV)
+            Extension: tsv
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.EditableRTF">
+            <summary>
+            Microsoft Word (97-2003) - Editable RTF
+            Extension: rtf
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.Xml">
+            <summary>
+            XML
+            Extension: xml
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.RPTR">
+            <summary>
+            Crystal Reports Read-Only
+            Extension: rptr
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportExportFormats.ExcelWorkbook">
+            <summary>
+            Microsoft Excel Workbook Data-Only
+            Extension: xlsx
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats">
+            <summary>
+            Crystal Reports Viewer export formats
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.NoFormat">
+            <summary>
+            Export disabled
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.PdfFormat">
+            <summary>
+            Portable Document Format
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.ExcelFormat">
+            <summary>
+            Microsoft Excel (97-2003) - XLS
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.WordFormat">
+            <summary>
+            Microsoft Word (97-2003) - DOC
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.RtfFormat">
+            <summary>
+            Rich Text Format (RTF)
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.RptFormat">
+            <summary>
+            Crystal Reports
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.ExcelRecordFormat">
+            <summary>
+            Microsoft Excel (97-2003) Data-Only - XLS
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.EditableRtfFormat">
+            <summary>
+            Microsoft Word (97-2003) - Editable RTF
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.XmlFormat">
+            <summary>
+            XML
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.XLSXFormat">
+            <summary>
+            Microsoft Excel Workbook Data-Only - XLSX
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.CsvFormat">
+            <summary>
+            Character Separated Values (CSV)
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerExportFormats.AllFormats">
+            <summary>
+            All available formats
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings">
+            <summary>
+            Crystal Reports Viewer Control and Window settings
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowCloseOnEscapeKey">
+            <summary>
+            Sets whether the report viewer window should be closed when user presses the Escape key.
+            Default: false
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowCloseOnEscapeKey">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowIcon">
+            <summary>
+            Sets the report viewer window icon.
+            Byte array must be a valid Bitmap.
+            Default: null (default icon)
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowMinimumWidth">
+            <summary>
+            Sets the report viewer window minimum width.
+            Default: 700
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowMinimumWidth">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowMinimumHeight">
+            <summary>
+            Sets the report viewer window minimum height.
+            Default: 500
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowMinimumHeight">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowMaximumWidth">
+            <summary>
+            Sets the report viewer window maximum width.
+            Default: null (any Width)
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowMaximumHeight">
+            <summary>
+            Sets the report viewer window maximum height.
+            Default: null (any Height)
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowInitialState">
+            <summary>
+            Sets the report viewer window initial state.
+            Default: Maximized
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowInitialState">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowInitialPosition">
+            <summary>
+            Sets the report viewer window starting position.
+            Default: WindowsDefaultLocation
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowInitialPosition">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowShowInTaskbar">
+            <summary>
+            Sets whether the report viewer window is displayed in the Windows taskbar.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowShowInTaskbar">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowAllowMinimize">
+            <summary>
+            Sets whether the user can minimize the report viewer window.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowAllowMinimize">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowAllowMaximize">
+            <summary>
+            Sets whether the user can maximize the report viewer window.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowAllowMaximize">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowAllowResize">
+            <summary>
+            Sets whether the user can resize the report viewer window.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeWindowAllowResize">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowLocationHeight">
+            <summary>
+            Optionally sets the report viewer window initial height.
+            Default: null (not set)
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowLocationWidth">
+            <summary>
+            Optionally sets the report viewer window initial width.
+            Default: null (not set)
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowLocationLeft">
+            <summary>
+            Optionally sets the report viewer window initial left location. WindowInitialPosition may override this setting.
+            Default: null (not set)
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.WindowLocationTop">
+            <summary>
+            Optionally sets the report viewer window initial top location. WindowInitialPosition may override this setting.
+            Default: null (not set)
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.SetUICulture(System.Globalization.CultureInfo)">
+            <summary>
+            Set the UI culture to use in the CrystalReportViewer control.
+            Default: Use system locale
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.UICultureLCID">
+            <summary>
+            Specified UI culture LCID.
+            </summary>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.AllowedExportFormats">
+            <summary>
+            Sets which exports formats are available.
+            Default: AllFormats
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeAllowedExportFormats">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ToolPanelView">
+            <summary>
+            Sets the report tool panel view type.
+            Default: GroupTree
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeToolPanelView">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.EnableDrillDown">
+            <summary>
+            Sets whether the user can drill down into the report.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeEnableDrillDown">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.EnableRefresh">
+            <summary>
+            Sets whether the refresh is enabled or not.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeEnableRefresh">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowCloseButton">
+            <summary>
+            Sets whether the close button on the toolbar is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowCloseButton">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowPrintButton">
+            <summary>
+            Sets whether the print button on the toolbar is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowPrintButton">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowExportButton">
+            <summary>
+            Sets whether the export button on the toolbar is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowExportButton">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowZoomButton">
+            <summary>
+            Sets whether the zoom button on the toolbar is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowZoomButton">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowCopyButton">
+            <summary>
+            Sets whether the copy button on the toolbar is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowCopyButton">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowRefreshButton">
+            <summary>
+            Sets whether the refresh button on the toolbar is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowRefreshButton">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowReportTabs">
+            <summary>
+            Sets whether the reports tabs on the toolbar are visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowReportTabs">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowGroupTreeButton">
+            <summary>
+            Sets whether the show/hide group tree button on the toolbar is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowGroupTreeButton">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShowParameterPanelButton">
+            <summary>
+            Sets whether the parameters panel is visible or hidden.
+            Default: true
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.ReportViewerSettings.ShouldSerializeShowParameterPanelButton">
+            <inheritdoc/>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ReportViewerToolPanelViewType">
+            <summary>
+            Crystal Reports Viewer Tool Panel View Types
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerToolPanelViewType.None">
+            <inheritdoc/>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerToolPanelViewType.GroupTree">
+            <inheritdoc/>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerToolPanelViewType.ParameterPanel">
+            <inheritdoc/>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowStartPosition">
+            <summary>
+            Specifies the initial position of a form
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowStartPosition.Manual">
+            <summary>
+            The position of the form is determined by WindowLocationLeft and WindowLocationTop properties.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowStartPosition.CenterScreen">
+            <summary>
+            The form is centered on the current display, and has the dimensions specified in the form's size.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowStartPosition.WindowsDefaultLocation">
+            <summary>
+            The form is positioned at the Windows default location and has the dimensions specified in the form's size.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowStartPosition.WindowsDefaultBounds">
+            <summary>
+            The form is positioned at the Windows default location and has the bounds determined by Windows default.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowStartPosition.CenterParent">
+            <summary>
+            The form is centered within the bounds of its parent form.
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowState">
+            <summary>
+            Specifies how a form window is displayed.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowState.Normal">
+            <summary>
+            A default sized window.
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowState.Minimized">
+            <summary>
+            A minimized window
+            </summary>
+        </member>
+        <member name="F:LijsDev.CrystalReportsRunner.Core.ReportViewerWindowState.Maximized">
+            <summary>
+            A maximized window.
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.WindowHandle">
+            <summary>
+            Generic window handle to a WinForms Form or WPF Window in the caller application.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.WindowHandle.#ctor(System.IntPtr)">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Core.WindowHandle.Handle">
+            <inheritdoc/>
+        </member>
+        <member name="T:Windows.Win32.Foundation.PCWSTR">
+            <summary>
+            A pointer to a constant character string.
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.Foundation.PCWSTR.Value">
+            <summary>
+            A pointer to the first character in the string. The content should be considered readonly, as it was typed as constant in the SDK.
+            </summary>
+        </member>
+        <member name="P:Windows.Win32.Foundation.PCWSTR.Length">
+            <summary>
+            Gets the number of characters up to the first null character (exclusive).
+            </summary>
+        </member>
+        <member name="M:Windows.Win32.Foundation.PCWSTR.ToString">
+            <summary>
+            Returns a <see langword="string"/> with a copy of this character array.
+            </summary>
+            <returns>A <see langword="string"/>, or <see langword="null"/> if <see cref="F:Windows.Win32.Foundation.PCWSTR.Value"/> is <see langword="null"/>.</returns>
+        </member>
+        <member name="M:Windows.Win32.Foundation.PCWSTR.AsSpan">
+            <summary>
+            Returns a span of the characters in this string.
+            </summary>
+        </member>
+        <member name="M:Windows.Win32.Foundation.PWSTR.AsSpan">
+            <summary>
+            Returns a span of the characters in this string.
+            </summary>
+        </member>
+        <member name="T:Windows.Win32.System.Threading.IO_COUNTERS">
+            <summary>Contains I/O accounting information for a process or a job object.</summary>
+            <remarks>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-io_counters">Learn more about this API from docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.ReadOperationCount">
+            <summary>The number of read operations performed.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.WriteOperationCount">
+            <summary>The number of write operations performed.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.OtherOperationCount">
+            <summary>The number of I/O operations performed, other than read and write operations.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.ReadTransferCount">
+            <summary>The number of bytes read.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.WriteTransferCount">
+            <summary>The number of bytes written.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.OtherTransferCount">
+            <summary>The number of bytes transferred during operations other than read and write operations.</summary>
+        </member>
+        <member name="T:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION">
+            <summary>Contains basic limit information for a job object.</summary>
+            <remarks>
+            <para>Processes can still empty their working sets using the <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-setprocessworkingsetsize">SetProcessWorkingSetSize</a> function with (<b>SIZE_T</b>)-1, even when <b>JOB_OBJECT_LIMIT_WORKINGSET</b> is used. However, you cannot use <b>SetProcessWorkingSetSize</b> change the minimum or maximum working set size of a process in a job object. The system increments the active process count when you attempt to associate a process with a job. If the limit is exceeded, the system decrements the active process count only when the process terminates and all handles to the process are closed. Therefore, if you have an open handle to a process that has been terminated in such a manner, you cannot associate any new processes until the handle is closed and the active process count is below the limit.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.PerProcessUserTimeLimit">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_PROCESS_TIME</b>, this member is the per-process user-mode execution time limit, in 100-nanosecond ticks. Otherwise, this member is ignored.</para>
+            <para>The system periodically checks to determine whether each process associated with the job has accumulated more user-mode time than the set limit. If it has, the process is terminated. If the job is nested, the effective limit is the most restrictive limit in the job chain.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.PerJobUserTimeLimit">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_JOB_TIME</b>, this member is the per-job user-mode execution time limit, in 100-nanosecond ticks. Otherwise, this member is ignored.</para>
+            <para>The system adds the current time of the processes associated with the job to this limit. For example, if you set this limit to 1 minute, and the job has a process that has accumulated 5 minutes of user-mode time, the limit actually enforced is 6 minutes. The system periodically checks to determine whether the sum of the user-mode execution time for all processes is greater than this end-of-job limit. If it is, the action specified in the <b>EndOfJobTimeAction</b> member of the <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_end_of_job_time_information">JOBOBJECT_END_OF_JOB_TIME_INFORMATION</a> structure is carried out. By default, all processes are terminated and the status code is set to <b>ERROR_NOT_ENOUGH_QUOTA</b>. To register  for  notification when this limit is exceeded without terminating processes, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> function with the <b>JobObjectNotificationLimitInformation</b> information class.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.LimitFlags">
+            <summary></summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.MinimumWorkingSetSize">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_WORKINGSET</b>, this member is the minimum working set size in bytes for each process associated with the job. Otherwise, this member is ignored. If <b>MaximumWorkingSetSize</b> is nonzero, <b>MinimumWorkingSetSize</b> cannot be zero.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.MaximumWorkingSetSize">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_WORKINGSET</b>, this member is the maximum working set size in bytes for each process associated with the job. Otherwise, this member is ignored. If <b>MinimumWorkingSetSize</b> is nonzero, <b>MaximumWorkingSetSize</b> cannot be zero.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.ActiveProcessLimit">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_ACTIVE_PROCESS</b>, this member is the active process limit for the job. Otherwise, this member is ignored. If you try to associate a process with a job, and this causes the active process count to exceed this limit, the process is terminated and the association fails.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.Affinity">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_AFFINITY</b>, this member is the processor affinity for all processes associated with the job. Otherwise, this member is ignored. The affinity must be a subset of the system affinity mask obtained by calling the <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-getprocessaffinitymask">GetProcessAffinityMask</a> function. The affinity of each thread is set to this value, but threads are free to subsequently set their affinity, as long as it is a subset of the specified affinity mask. Processes cannot set their own affinity mask.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.PriorityClass">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_PRIORITY_CLASS</b>, this member is the priority class for all processes associated with the job. Otherwise, this member is ignored. Processes and threads cannot modify their priority class. The calling process must enable the <b>SE_INC_BASE_PRIORITY_NAME</b> privilege.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.SchedulingClass">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_SCHEDULING_CLASS</b>, this member is the scheduling class for all processes associated with the job. Otherwise, this member is ignored. The valid values are 0 to 9. Use 0 for the least favorable scheduling class relative to other threads, and 9 for the most favorable scheduling class relative to other threads. By default, this value is 5. To use a scheduling class greater than 5, the calling process must enable the <b>SE_INC_BASE_PRIORITY_NAME</b> privilege.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="T:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION">
+            <summary>Contains basic and extended limit information for a job object.</summary>
+            <remarks>
+            <para>The system tracks the value of <b>PeakProcessMemoryUsed</b> and <b>PeakJobMemoryUsed</b> constantly. This allows you know the peak memory usage of each job. You can use this information to establish a memory limit using the <b>JOB_OBJECT_LIMIT_PROCESS_MEMORY</b> or <b>JOB_OBJECT_LIMIT_JOB_MEMORY</b> value. Note that the job memory and process memory limits are very similar in operation, but they are independent. You could set a job-wide limit of 100 MB with a per-process limit of 10 MB. In this scenario, no single process could commit more than 10 MB, and the set of processes associated with a job could never exceed 100 MB. To register for notifications  that a job has exceeded its peak memory limit while allowing processes to continue to commit memory, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> function with the <b>JobObjectNotificationLimitInformation</b> information class.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_extended_limit_information#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.BasicLimitInformation">
+            <summary>
+            <para>A <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_basic_limit_information">JOBOBJECT_BASIC_LIMIT_INFORMATION</a> structure that contains basic limit information.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_extended_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.IoInfo">
+            <summary>Reserved.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.ProcessMemoryLimit">
+            <summary>
+            <para>If the <b>LimitFlags</b> member of the <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_basic_limit_information">JOBOBJECT_BASIC_LIMIT_INFORMATION</a> structure specifies the <b>JOB_OBJECT_LIMIT_PROCESS_MEMORY</b> value, this member specifies the limit for the virtual memory that can be committed by a process. Otherwise, this member is ignored.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_extended_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.JobMemoryLimit">
+            <summary>
+            <para>If the <b>LimitFlags</b> member of the <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_basic_limit_information">JOBOBJECT_BASIC_LIMIT_INFORMATION</a> structure specifies the <b>JOB_OBJECT_LIMIT_JOB_MEMORY</b> value, this member specifies the limit for the virtual memory that can be committed for the job. Otherwise, this member is ignored.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//winnt/ns-winnt-jobobject_extended_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.PeakProcessMemoryUsed">
+            <summary>The peak memory used by any process ever associated with the job.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.PeakJobMemoryUsed">
+            <summary>The peak memory usage of all processes currently associated with the job.</summary>
+        </member>
+        <member name="T:Windows.Win32.PInvoke">
+            <content>
+            Contains extern methods from "Kernel32.dll".
+            </content>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.CloseHandle(Windows.Win32.Foundation.HANDLE)">
+            <summary>Closes an open object handle.</summary>
+            <param name="hObject">A valid handle to an open object.</param>
+            <returns>
+            <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>. If the application is running under a debugger,  the function will throw an exception if it receives either a  handle value that is not valid  or a pseudo-handle value. This can happen if you close a handle twice, or if you  call <b>CloseHandle</b> on a handle returned by the <a href="/windows/desktop/api/fileapi/nf-fileapi-findfirstfilea">FindFirstFile</a> function instead of calling the <a href="/windows/desktop/api/fileapi/nf-fileapi-findclose">FindClose</a> function.</para>
+            </returns>
+            <remarks>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//handleapi/nf-handleapi-closehandle">Learn more about this API from docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.CreateJobObject(System.Nullable{Windows.Win32.Security.SECURITY_ATTRIBUTES},System.String)">
+            <inheritdoc cref="M:Windows.Win32.PInvoke.CreateJobObject(Windows.Win32.Security.SECURITY_ATTRIBUTES*,Windows.Win32.Foundation.PCWSTR)"/>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.CreateJobObject(Windows.Win32.Security.SECURITY_ATTRIBUTES*,Windows.Win32.Foundation.PCWSTR)">
+            <summary>Creates or opens a job object.</summary>
+            <param name="lpJobAttributes">
+            <para>A pointer to a <a href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/aa379560(v=vs.85)">SECURITY_ATTRIBUTES</a> structure that specifies the security descriptor for the job object and determines whether child processes can inherit the returned handle. If <i>lpJobAttributes</i> is <b>NULL</b>, the job object gets a default security descriptor and the handle cannot be inherited. The ACLs in the default security descriptor for a job object come from the primary or impersonation token of the creator.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-createjobobjectw#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="lpName">
+            <para>The name of the job. The name is limited to <b>MAX_PATH</b> characters. Name comparison is case-sensitive.</para>
+            <para>If <i>lpName</i> is <b>NULL</b>, the job is created without a name. If <i>lpName</i> matches the name of an existing event, semaphore, mutex, waitable timer, or file-mapping object, the function fails and the <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a> function returns <b>ERROR_INVALID_HANDLE</b>. This occurs because these objects share the same namespace. The object can be created in a private namespace. For more information, see <a href="https://docs.microsoft.com/windows/desktop/Sync/object-namespaces">Object Namespaces</a>. <b>Terminal Services:  </b>The name can have a "Global\\" or "Local\\" prefix to explicitly create the object in the global or session namespace. The remainder of the name can contain any character except the backslash character (\\). For more information, see <a href="https://docs.microsoft.com/windows/desktop/TermServ/kernel-object-namespaces">Kernel Object Namespaces</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-createjobobjectw#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <returns>
+            <para>If the function succeeds, the return value is a handle to the job object. The handle has the <b>JOB_OBJECT_ALL_ACCESS</b> access right. If the object existed before the function call, the function returns a handle to the existing job object and <a href="/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a> returns <b>ERROR_ALREADY_EXISTS</b>. If the function fails, the return value is NULL. To get extended error information, call <a href="/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+            </returns>
+            <remarks>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-createjobobjectw">Learn more about this API from docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.SetInformationJobObject(System.Runtime.InteropServices.SafeHandle,Windows.Win32.System.JobObjects.JOBOBJECTINFOCLASS,System.Void*,System.UInt32)">
+            <inheritdoc cref="M:Windows.Win32.PInvoke.SetInformationJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.System.JobObjects.JOBOBJECTINFOCLASS,System.Void*,System.UInt32)"/>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.SetInformationJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.System.JobObjects.JOBOBJECTINFOCLASS,System.Void*,System.UInt32)">
+            <summary>Sets limits for a job object.</summary>
+            <param name="hJob">
+            <para>A handle to the job whose limits are being set. The <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-createjobobjecta">CreateJobObject</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-openjobobjecta">OpenJobObject</a> function returns this handle. The handle must have the <b>JOB_OBJECT_SET_ATTRIBUTES</b> access right. For more information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/job-object-security-and-access-rights">Job Object Security and Access Rights</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-setinformationjobobject#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="JobObjectInformationClass"></param>
+            <param name="lpJobObjectInformation">The limits or job state to be set for the job. The format of this data depends on the value of <i>JobObjectInfoClass</i>.</param>
+            <param name="cbJobObjectInformationLength">The size of the job information being set, in bytes.</param>
+            <returns>
+            <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+            </returns>
+            <remarks>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-setinformationjobobject">Learn more about this API from docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.AssignProcessToJobObject(System.Runtime.InteropServices.SafeHandle,System.Runtime.InteropServices.SafeHandle)">
+            <inheritdoc cref="M:Windows.Win32.PInvoke.AssignProcessToJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.Foundation.HANDLE)"/>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.AssignProcessToJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.Foundation.HANDLE)">
+            <summary>Assigns a process to an existing job object.</summary>
+            <param name="hJob">
+            <para>A handle to the job object to which the process will be associated. The <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-createjobobjecta">CreateJobObject</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-openjobobjecta">OpenJobObject</a> function returns this handle. The handle must have the JOB_OBJECT_ASSIGN_PROCESS access right. For more information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/job-object-security-and-access-rights">Job Object Security and Access Rights</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-assignprocesstojobobject#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="hProcess">
+            <para>A handle to the process to associate with the job object. The handle must have the PROCESS_SET_QUOTA and PROCESS_TERMINATE access rights. For more information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/process-security-and-access-rights">Process Security and Access Rights</a>. If the process is already associated with a job, the job specified by <i>hJob</i> must be empty or it must be in the hierarchy of nested jobs to which the process already belongs, and it cannot have UI limits set (<a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> with <b>JobObjectBasicUIRestrictions</b>). For more information, see Remarks. <b>Windows 7, Windows Server 2008 R2, Windows XP with SP3, Windows Server 2008, Windows Vista and Windows Server 2003:  </b>The process must not already be assigned to a job; if it is, the function fails with ERROR_ACCESS_DENIED. This behavior changed starting in Windows 8 and Windows Server 2012. <b>Terminal Services:  </b>All processes within a job must run within the same session as the job.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-assignprocesstojobobject#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <returns>
+            <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+            </returns>
+            <remarks>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//jobapi2/nf-jobapi2-assignprocesstojobobject">Learn more about this API from docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="T:Windows.Win32.Security.SECURITY_ATTRIBUTES">
+            <summary>The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.</summary>
+            <remarks>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//wtypesbase/ns-wtypesbase-security_attributes#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="F:Windows.Win32.Security.SECURITY_ATTRIBUTES.nLength">
+            <summary>The size, in bytes, of this structure. Set this value to the size of the **SECURITY\_ATTRIBUTES** structure.</summary>
+        </member>
+        <member name="F:Windows.Win32.Security.SECURITY_ATTRIBUTES.lpSecurityDescriptor">
+            <summary>
+            <para>A pointer to a [**SECURITY\_DESCRIPTOR**](../winnt/ns-winnt-security_descriptor.md) structure that controls access to the object. If the value of this member is **NULL**, the object is assigned the default security descriptor associated with the [*access token*](/windows/win32/secauthz/access-tokens) of the calling process. This is not the same as granting access to everyone by assigning a **NULL** [*discretionary access control list*](/windows/win32/secauthz/dacls-and-aces) (DACL). By default, the default DACL in the access token of a process allows access only to the user represented by the access token. For information about creating a security descriptor, see [Creating a Security Descriptor](/windows/win32/secauthz/creating-a-security-descriptor-for-a-new-object-in-c--).</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api//wtypesbase/ns-wtypesbase-security_attributes#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.Security.SECURITY_ATTRIBUTES.bInheritHandle">
+            <summary>A Boolean value that specifies whether the returned handle is inherited when a new process is created. If this member is **TRUE**, the new process inherits the handle.</summary>
+        </member>
+    </members>
+</doc>

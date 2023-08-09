@@ -1,0 +1,12 @@
+[b-fm51y8wyw1] .mud-button {
+    border: 2px solid red;
+    width: 100px;
+    text-align: right;
+  
+}
+.container[b-fm51y8wyw1] {
+    display : flex ;
+    justify-content : space-between ;
+    flex-direction :column;   /*vertically*/
+    align-items: flex-start ; /*position*/
+}

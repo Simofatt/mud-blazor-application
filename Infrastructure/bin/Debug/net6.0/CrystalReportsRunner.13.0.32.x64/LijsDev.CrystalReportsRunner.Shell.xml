@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LijsDev.CrystalReportsRunner.Shell</name>
+    </assembly>
+    <members>
+        <member name="T:LijsDev.CrystalReportsRunner.Shell.IReportExporter">
+            <summary>
+            Report Exporter interface
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.IReportExporter.Export(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats,System.String,System.Boolean)">
+            <summary>
+            Exports a report to the specified filename.
+            </summary>
+            <param name="report">Report to export</param>
+            <param name="exportFormat">Export format</param>
+            <param name="destinationFilename">Destination filename</param>
+            <param name="overwrite">Overwrite existing destination file if exists. Default: true</param>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.IReportExporter.ExportToMemoryMappedFile(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats)">
+            <summary>
+            Exports a report to a memory mapped file.
+            Returns the name of the memory mapped file.
+            </summary>
+            <param name="report">Report to export</param>
+            <param name="exportFormat">Export format</param>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Shell.IReportViewer">
+            <summary>
+            Report Viewer interface
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.IReportViewer.GetViewerForm(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportViewerSettings)">
+            <summary>
+            Get Crystal Reports Viewer Form
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Shell.Shell">
+            <summary>
+            Shell implementation for Crystal Reports Runner
+            </summary>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Shell.Shell.Options">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Shell.Shell.Options.PipeName">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Shell.Shell.Options.LogLevel">
+            <inheritdoc/>
+        </member>
+        <member name="P:LijsDev.CrystalReportsRunner.Shell.Shell.Options.LogDirectory">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.Shell.#ctor(LijsDev.CrystalReportsRunner.Shell.IReportViewer,LijsDev.CrystalReportsRunner.Shell.IReportExporter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.Shell.StartListening(System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.WinFormsReportRunner.Export(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats,System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.WinFormsReportRunner.ExportToMemoryMappedFile(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportExportFormats)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.WinFormsReportRunner.ShowReport(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportViewerSettings,LijsDev.CrystalReportsRunner.Core.WindowHandle)">
+            <inheritdoc/>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Shell.WinFormsReportRunner.ShowReportDialog(LijsDev.CrystalReportsRunner.Core.Report,LijsDev.CrystalReportsRunner.Core.ReportViewerSettings,LijsDev.CrystalReportsRunner.Core.WindowHandle)">
+            <inheritdoc/>
+        </member>
+        <member name="T:LijsDev.CrystalReportsRunner.Core.NLogHelper">
+            <summary>
+            NLog Helper methods.
+            </summary>
+        </member>
+        <member name="M:LijsDev.CrystalReportsRunner.Core.NLogHelper.ConfigureNLog(System.String,LijsDev.CrystalReportsRunner.Core.LogLevel)">
+            <summary>
+            Configures NLog according to the provided command line options.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,6 @@
+C:\Users\Simofatt\MudBlazorApp\DTO\bin\Debug\DTO.dll
+C:\Users\Simofatt\MudBlazorApp\DTO\bin\Debug\DTO.pdb
+C:\Users\Simofatt\MudBlazorApp\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+C:\Users\Simofatt\MudBlazorApp\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\Simofatt\MudBlazorApp\DTO\obj\Debug\DTO.dll
+C:\Users\Simofatt\MudBlazorApp\DTO\obj\Debug\DTO.pdb

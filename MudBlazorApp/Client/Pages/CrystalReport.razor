@@ -1,0 +1,41 @@
+﻿@page "/crystalReport"
+@using Infrastructure.ApiClient ;
+@inject HttpClient Http
+@inject ApiClient _apiClient
+@using Domain;
+
+
+<h3>CrystalReport</h3>
+
+
+
+<MudButton Variant="Variant.Filled" @onclick="SeeCrystalReport">See the crytal report</MudButton>
+
+
+
+@code {
+
+    //public ShowCrystalReport2 crystalReport { get; set; }
+    //[Inject] IApiClient _apiClient { get; set; }
+    // private readonly string _reportFileName = "report.rpt";// Provide the desired file path and name
+   
+    
+
+
+    public async Task SeeCrystalReport()
+    {
+        //  await _apiClient.DownloadCrystalReportAsync();
+       // crystalReport = new();
+        // Create a unique file name for the report (e.g., using a timestamp)
+       
+        
+        //string reportFileName = "report_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rpt";
+
+       
+
+    
+    
+    }
+
+ 
+}
